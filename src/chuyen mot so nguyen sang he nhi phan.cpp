@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<math.h>
-long long dec2Bin (int decimalNumber){
+long dec2Bin (int decimalNumber){
     long long binaryNumber = 0;
     int p = 0;
     while (decimalNumber > 0){

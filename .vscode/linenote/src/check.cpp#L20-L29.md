@@ -1,1 +1,0 @@
-*nhập vào một danh sách sinh viên
