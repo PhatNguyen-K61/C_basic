@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <math.h>
 typedef struct Monomial
 {
     int coefficient; //hệ số
@@ -120,7 +119,7 @@ void outputCompareMonomial(Monomial first_monomial, Monomial second_monomial)
         printf("\nfirst monomial is bigger than second monomial");
         break;
     default:
-        printf("\n Two monorials are equal");
+        printf("\nTwo monorials are equal");
         break;
     }
 }
