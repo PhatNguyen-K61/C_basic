@@ -15,7 +15,10 @@
 -TimPhanTuAmLonNhat.cpp: Tìm phần tử âm lớn nhất trong mảng 1 chiều.
 -Tính=....cpp: Tính S(n)= 1 + 1/2 + 1/3 + ... + 1/n.
 -ToaDoOxy.cpp: Nhập vào tọa độ và tính toán.
+-TongDay.cpp: Tính tồng 1 dãy số.
+-TongDay_v1.cpp: Tính S(n)=1^2 + 2^2 + 3^2 +...+ n^2.
 -danhSachSinhVien.cpp: Nhập vào danh sách thông tin sinh viên và sử dụng.
+-nhapMang.cpp: Nhập vào mảng 1 chiều và xét đk.
 -sapXepCacPhanTuTrongMangGiamDan.cpp: Sắp xếp các phần từ trong mảng giảm dần.
 -timXTrongn.cpp: Tìm x trong mảng 1 chiều.
 -tinhTong1DaySoLe.cpp: Tính tổng 1 dãy số lẻ.
