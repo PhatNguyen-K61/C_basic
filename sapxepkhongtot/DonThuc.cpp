@@ -1,5 +1,5 @@
 #include <stdio.h>
-typedef struct Monomial
+struct Monomial
 {
     int coefficient; //hệ số
     int indexNumber; //số mũ
