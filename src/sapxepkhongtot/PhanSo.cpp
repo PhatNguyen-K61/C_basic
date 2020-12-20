@@ -7,6 +7,7 @@ struct Fraction
 };
 void inputFraction(Fraction &fraction);
 void outputFraction(Fraction fraction);
+void outputDecimal(Fraction fraction);
 int greatestCommonDivisor(int a, int b);
 void compactFraction(Fraction &fraction);
 Fraction summationFraction(Fraction first_fraction, Fraction second_fraction);
@@ -21,19 +22,25 @@ int main()
     inputFraction(first_fraction);  //phân số 1
     inputFraction(second_fraction); //phân số 2
     outputFraction(first_fraction);
+    outputDecimal(first_fraction);
     outputFraction(second_fraction);
+    outputDecimal(second_fraction);
     Fraction total = summationFraction(first_fraction, second_fraction);
     printf("\nSummation of 2 fractions is: ");
     outputFraction(total);
+    outputDecimal(total);
     Fraction minus = subtractionFraction(first_fraction, second_fraction);
     printf("\nSubtraction of 2 fractions is: ");
     outputFraction(minus);
+    outputDecimal(minus);
     Fraction times = multiplicationFraction(first_fraction, second_fraction);
     printf("\nSubtraction of 2 fractions is: ");
     outputFraction(times);
+    outputDecimal(times);
     Fraction devides = devisionFraction(first_fraction, second_fraction);
     printf("\nDevision of 2 fractions is: ");
     outputFraction(devides);
+    outputDecimal(devides);
     outputCompareFraction(first_fraction, second_fraction);
 }
 void inputFraction(Fraction &fraction)
@@ -143,12 +150,17 @@ void outputCompareFraction(Fraction first_fraction, Fraction second_fraction)
     switch (compareFraction(first_fraction, second_fraction))
     {
     case 0:
-        printf("\nFirst fraction is bigger than second fraction");
+        printf("\n-First fraction is bigger than second fraction");
         break;
     case 1:
-        printf("\nFirst fraction is smaller than second fraction");
+        printf("\n-First fraction is smaller than second fraction");
         break;
     default:
-        printf("\nTwo fractions are equal");
+        printf("\n-Two fractions are equal");
     }
+}
+void outputDecimal(Fraction fraction){
+    float decimal;
+    decimal=(float)fraction.numerator/(float)fraction.denominator;
+    printf("\n*Decimal of fraction is: %.4f", decimal);
 }
