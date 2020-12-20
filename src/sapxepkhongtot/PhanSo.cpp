@@ -160,6 +160,7 @@ void outputCompareFraction(Fraction first_fraction, Fraction second_fraction)
     }
 }
 void outputDecimal(Fraction fraction){
+    //đổi ra số thập phân
     float decimal;
     decimal=(float)fraction.numerator/(float)fraction.denominator;
     printf("\n*Decimal of fraction is: %.4f", decimal);
