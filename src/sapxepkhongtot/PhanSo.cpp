@@ -159,9 +159,10 @@ void outputCompareFraction(Fraction first_fraction, Fraction second_fraction)
         printf("\n-Two fractions are equal");
     }
 }
-void outputDecimal(Fraction fraction){
+void outputDecimal(Fraction fraction)
+{
     //đổi ra số thập phân
     float decimal;
-    decimal=(float)fraction.numerator/(float)fraction.denominator;
+    decimal = (float)fraction.numerator / (float)fraction.denominator;
     printf("\n*Decimal of fraction is: %.4f", decimal);
 }
