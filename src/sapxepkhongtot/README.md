@@ -1,7 +1,6 @@
 # Danh sách file
 -ChuyenSangNhiPhan.cpp: Chuyển 1 số sang hệ hị phân.
 -DemSoNguyenTo.cpp: Đếm số nguyên tố trong mảng 1 chiều.
--DonThuc.cpp: Nhập Đơn thức và tính toán.
 -MaxMinMang.cpp: Tìm Max Min trong mảng 1 chiều.
 -Date.cpp: nhập Ngày tháng năm.
 -NgayThang.cpp: nhập Ngày tháng năm V.0.
@@ -17,7 +16,6 @@
 -ToaDoOxy.cpp: Nhập vào tọa độ và tính toán.
 -TongDay.cpp: Tính tồng 1 dãy số.
 -TongDay_v1.cpp: Tính S(n)=1^2 + 2^2 + 3^2 +...+ n^2.
--danhSachSinhVien.cpp: Nhập vào danh sách thông tin sinh viên và sử dụng.
 -nhapMang.cpp: Nhập vào mảng 1 chiều và xét đk.
 -sapXepCacPhanTuTrongMangGiamDan.cpp: Sắp xếp các phần từ trong mảng giảm dần.
 -timXTrongn.cpp: Tìm x trong mảng 1 chiều.
