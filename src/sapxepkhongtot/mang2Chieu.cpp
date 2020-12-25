@@ -44,7 +44,7 @@ void output(int a[][100], int m, int n)
     }
 }
 int findMax(int a[][100], int m, int n)
-{
+{//tìm phần tử lớn nhất
     int max = a[0][0];
     for (int i = 0; i < m; i++)
     {
@@ -63,23 +63,8 @@ void max(int a[][100], int m, int n)
     int max = findMax(a, m, n);
     printf("The max number is %d", max);
 }
-int findMin(int a[][100], int m, int n)
-{
-    int min = a[0][0];
-    for (int i = 0; i < m; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            if (min > a[i][j])
-            {
-                min = a[i][j];
-            }
-        }
-    }
-    return min;
-}
 void maxPosition(int a[][100], int m, int n)
-{
+{//vị trí phần tử lớn nhất
     int u = 0, v = 0;
     int max = a[0][0];
     for (int i = 0; i < m; i++)
@@ -96,13 +81,28 @@ void maxPosition(int a[][100], int m, int n)
     }
     printf("\nPosition of max number is [%d][%d]", u + 1, v + 1);
 }
+int findMin(int a[][100], int m, int n)
+{//tìm phần tử nhỏ nhất
+    int min = a[0][0];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (min > a[i][j])
+            {
+                min = a[i][j];
+            }
+        }
+    }
+    return min;
+}
 void min(int a[][100], int m, int n)
 {
     int min = findMin(a, m, n);
     printf("\nThe min number is %d", min);
 }
 void minPosition(int a[][100], int m, int n)
-{
+{//vị trí phần tử nhỏ nhất
     int u = 0, v = 0;
     int min = a[0][0];
     for (int i = 0; i < m; i++)
