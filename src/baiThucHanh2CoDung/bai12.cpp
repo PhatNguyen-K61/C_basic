@@ -15,10 +15,10 @@ int main(){
     return 0;
 }
 void enter(int &n,int &m, int a[]){
-    printf("enter the N number: ");
+    printf("Enter the N number: ");
     scanf("%d", &n);
     do{
-    printf("\nenter the M number and m < n: ");
+    printf("\nEnter the M number with m < n: ");
     scanf("%d", &m);
     } while (n<m);
     for(int i = m; i<=n; i++){
@@ -45,10 +45,10 @@ int countNumber(int n, int m, int a[]){
 }
 void printCountNumber(int n, int m, int a[]){
     int count_number =  countNumber(n,m,a);
-    printf("\nthe amount of number in array is %d ", count_number);
+    printf("\nThe amount of number in array is %d ", count_number);
 }
 void printNumber(int n, int m, int a[]){
-    printf("\nyour result: ");
+    printf("\nYour result: ");
     for(int i = m; i<=n; i++){
         if(a[i] % 5 == 2){
             printf("%4d", a[i]);
