@@ -16,6 +16,7 @@
 -ToaDoOxy.cpp: Nhập vào tọa độ và tính toán.
 -TongDay.cpp: Tính tồng 1 dãy số.
 -TongDay_v1.cpp: Tính S(n)=1^2 + 2^2 + 3^2 +...+ n^2.
+-mang2Chieu.cpp: Nhập xuất mảng 2 chiều.
 -nhapMang.cpp: Nhập vào mảng 1 chiều và xét đk.
 -sapXepCacPhanTuTrongMangGiamDan.cpp: Sắp xếp các phần từ trong mảng giảm dần.
 -timXTrongn.cpp: Tìm x trong mảng 1 chiều.
