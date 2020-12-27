@@ -68,21 +68,18 @@ void max(int a[][100], int n, int m)
 }
 void maxPosition(int a[][100], int n, int m)
 { //vị trí phần tử lớn nhất
-    int u = 0, v = 0;
-    int max = a[0][0];
+    int max = findMax(a, n, m);
+    printf("\nPosition of max number is: ");
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
         {
-            if (max < a[i][j])
+            if (max == a[i][j])
             {
-                max = a[i][j];
-                u = i;
-                v = j;
+                printf("\nrow = %d,col = %d ",i+1,j+1);
             }
         }
     }
-    printf("\nPosition of max number is [%d][%d]", u + 1, v + 1);
 }
 int findMin(int a[][100], int n, int m)
 { //tìm phần tử nhỏ nhất
@@ -114,7 +111,7 @@ void minPosition(int a[][100], int n, int m)
         {
             if (min == a[i][j])
             {
-                printf("row = %d,col = %d ",i,j);
+                printf("\nrow = %d,col = %d ",i+1,j+1);
             }
         }
     }
