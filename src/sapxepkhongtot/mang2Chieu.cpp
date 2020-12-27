@@ -124,17 +124,22 @@ void minPosition(int a[][100], int n, int m)
 }
 bool checkLowerTriangularMatrix(int a[][100], int n, int m)
 { //kiểm tra ma trận tam giác trên
+    bool is_lower_triangular_matrix = true;
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
         {
             if (i > j && a[i][j] != 0)
             {
-                return false;
+                is_lower_triangular_matrix = false;
+                break;
             }
         }
+        if(!is_lower_triangular_matrix){
+            break;   
+        }
     }
-    return true;
+    return is_lower_triangular_matrix;
 }
 void lowerTriangularMatrix(int a[][100], int n, int m)
 {
