@@ -106,21 +106,18 @@ void min(int a[][100], int n, int m)
 }
 void minPosition(int a[][100], int n, int m)
 { //vị trí phần tử nhỏ nhất
-    int u = 0, v = 0;
-    int min = a[0][0];
+    int min = findMin(a,n,m);
+    printf("\nPosition of min number is: ");
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
         {
-            if (min > a[i][j])
+            if (min == a[i][j])
             {
-                min = a[i][j];
-                u = i;
-                v = j;
+                printf("row = %d,col = %d ",i,j);
             }
         }
     }
-    printf("\nPosition of min number is [%d][%d]", u + 1, v + 1);
 }
 bool checkLowerTriangularMatrix(int a[][100], int n, int m)
 { //kiểm tra ma trận tam giác trên
