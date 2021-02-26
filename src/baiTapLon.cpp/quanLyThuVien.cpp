@@ -6,13 +6,14 @@ struct book_st{
     int price;
 };
 void enter(book_st *input);
-void enter3Books(book_st *input);
-void sort(book_st *input);
+void enterBooks(book_st *input, int numberBooks);
+void print(book_st *input, int numberBooks);
 int main(){
     book_st *bookList;
-    bookList = (book_st *)malloc(sizeof(book_st));
-    enter3Books(bookList);
-    sort(bookList);
+    int numberBooks = 3;
+    bookList = (book_st *)malloc(numberBooks*sizeof(book_st));// cấp phát numberBook cuốn sách
+    enterBooks(bookList,numberBooks);
+    print(bookList, numberBooks);
 }
 void enter(book_st *input){
     printf("\nTen: ");
@@ -23,15 +24,15 @@ void enter(book_st *input){
     printf("Gia tien: ");
     scanf("%d", &input->price);
 }
-void enter3Books(book_st *input){
-    for(int index=0;index<3;index++){
+void enterBooks(book_st *input, int numberBooks){
+    for(int index=0;index<numberBooks;index++){
         printf("\nNhap quyen sach %d", index+1);
         enter(input+index);
     }
 }
-void sort(book_st *input){
+void print(book_st *input,int numberBooks){
     printf("STT||Ten\t\t||The loai\t\t||Gia tien");
-    for(int index=0; index < 3; index++){
+    for(int index=0; index < numberBooks; index++){
         printf("\n00%d||%s\t\t||%s\t\t||%d",index+1,(input+index)->name,(input+index)->type,(input+index)->price);
     }
 }
