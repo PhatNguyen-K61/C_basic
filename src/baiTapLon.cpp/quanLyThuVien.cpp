@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 struct book_st{
     char name[30];
     char type[30];
@@ -8,12 +9,18 @@ struct book_st{
 void enter(book_st *input);
 void enterBooks(book_st *input, int numberBooks);
 void print(book_st *input, int numberBooks);
+void arrangeBook(book_st *input, int numberBooks);
+int comicBooks(book_st *input, int numberBooks);
+int swordHeroBooks(book_st *input, int numberBooks);
+void printTypeBooks(book_st *input, int numberBooks);
 int main(){
     book_st *bookList;
     int numberBooks = 3;
     bookList = (book_st *)malloc(numberBooks*sizeof(book_st));// cấp phát numberBook cuốn sách
     enterBooks(bookList,numberBooks);
+    arrangeBook(bookList, numberBooks);
     print(bookList, numberBooks);
+    printTypeBooks(bookList, numberBooks);
 }
 void enter(book_st *input){
     printf("\nTen: ");
@@ -35,4 +42,38 @@ void print(book_st *input,int numberBooks){
     for(int index=0; index < numberBooks; index++){
         printf("\n00%d||%s\t\t||%s\t\t||%d",index+1,(input+index)->name,(input+index)->type,(input+index)->price);
     }
+}
+void arrangeBook(book_st *input, int numberBooks){
+    book_st temp;
+    for(int i = 0; i < numberBooks-1; i++){
+        for(int j = i+1; j <numberBooks; j++){
+            if(strcmp((input+i)->name, (input+j)->name) < 0){
+                temp = *(input+i);
+                *(input+i)= *(input+j);
+                *(input+j) = temp;
+            }
+        }
+    }
+}
+int comicBooks(book_st *input, int numberBooks){
+    int count = 0;
+    for(int i=0; i < numberBooks; i++){
+        if(strcmp((input+i)->type,"truyen tranh") ==0){
+            count++;
+        }
+    }
+    return count;
+}
+int swordHeroBooks(book_st *input, int numberBooks){
+    int count = 0;
+    for(int i=0; i < numberBooks; i++){
+        if(strcmp((input+i)->type,"truyen kiem hiep") ==0){
+            count++;
+        }
+    }
+    return count;
+}
+void printTypeBooks(book_st *input, int numberBooks){
+    printf("\nTruyen tranh co %d quyen sach", comicBooks(input, numberBooks));
+    printf("\nTruyen kiem hiep co %d quyen sach", swordHeroBooks(input, numberBooks));
 }
