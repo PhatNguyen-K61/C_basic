@@ -13,14 +13,20 @@ void arrangeBook(book_st *input, int numberBooks);
 int comicBooks(book_st *input, int numberBooks);
 int swordHeroBooks(book_st *input, int numberBooks);
 void printTypeBooks(book_st *input, int numberBooks);
+void enterType(char typeBook[30]);
+book_st *findBookByType(book_st *input, int numberBooks, char typeBook[30]);
+int countBooks(book_st *input, int numberBooks, char typeBook[30]);
 int main(){
     book_st *bookList;
     int numberBooks = 3;
+    char typeBook[30];
     bookList = (book_st *)malloc(numberBooks*sizeof(book_st));// cấp phát numberBook cuốn sách
     enterBooks(bookList,numberBooks);
     arrangeBook(bookList, numberBooks);
     print(bookList, numberBooks);
     printTypeBooks(bookList, numberBooks);
+    enterType(typeBook);
+    print(findBookByType(bookList, numberBooks, typeBook), countBooks(bookList, numberBooks, typeBook));
 }
 void enter(book_st *input){
     printf("\nTen: ");
@@ -38,7 +44,7 @@ void enterBooks(book_st *input, int numberBooks){
     }
 }
 void print(book_st *input,int numberBooks){
-    printf("STT||Ten\t\t||The loai\t\t||Gia tien");
+    printf("\nSTT||Ten\t\t||The loai\t\t||Gia tien");
     for(int index=0; index < numberBooks; index++){
         printf("\n00%d||%s\t\t||%s\t\t||%d",index+1,(input+index)->name,(input+index)->type,(input+index)->price);
     }
@@ -76,4 +82,25 @@ int swordHeroBooks(book_st *input, int numberBooks){
 void printTypeBooks(book_st *input, int numberBooks){
     printf("\nTruyen tranh co %d quyen sach", comicBooks(input, numberBooks));
     printf("\nTruyen kiem hiep co %d quyen sach", swordHeroBooks(input, numberBooks));
+}
+void enterType(char typeBook[30]){
+    fflush(stdin);
+    printf("\nNhap the loai: ");
+    gets(typeBook);
+}
+int countBooks(book_st *input, int numberBooks, char typeBook[30]){
+    int count=0;
+    for(int i=0; i < numberBooks; i++){
+        if(strcmp((input+i)->type,typeBook)==0){
+            count++;
+        }
+    }
+    return count;
+}
+book_st *findBookByType(book_st *input, int numberBooks, char typeBook[30]){
+    for(int i=0; i < numberBooks; i++){
+        if(strcmp((input+i)->type,typeBook)==0){
+            return (input+i);
+        }
+    }
 }
