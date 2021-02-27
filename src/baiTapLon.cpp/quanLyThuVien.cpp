@@ -44,9 +44,13 @@ void enterBooks(book_st *input, int numberBooks){
     }
 }
 void print(book_st *input,int numberBooks){
-    printf("\nSTT||Ten\t\t||The loai\t\t||Gia tien");
-    for(int index=0; index < numberBooks; index++){
-        printf("\n00%d||%s\t\t||%s\t\t||%d",index+1,(input+index)->name,(input+index)->type,(input+index)->price);
+    if(numberBooks==0){
+        printf("Khong co quyen sach thuoc the loai nay!");
+    }else{
+        printf("\nSTT||Ten\t\t||The loai\t\t||Gia tien");
+        for(int index=0; index < numberBooks; index++){
+            printf("\n00%d||%s\t\t||%s\t\t||%d",index+1,(input+index)->name,(input+index)->type,(input+index)->price);
+        }
     }
 }
 void arrangeBook(book_st *input, int numberBooks){
