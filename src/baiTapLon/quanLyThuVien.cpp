@@ -14,9 +14,12 @@ int comicBooks(book_st *input, int numberBooks);
 int swordHeroBooks(book_st *input, int numberBooks);
 void printTypeBooks(book_st *input, int numberBooks);
 void enterType(char typeBook[30]);
-book_st *findBookByType(book_st *input, int numberBooks, char typeBook[30]);
-int countBooks(book_st *input, int numberBooks, char typeBook[30]);
+book_st *findBookByType(book_st *input, int numberBooks, const char typeBook[30]);
+int countBooks(book_st *input, int numberBooks, const char typeBook[30]);
+void exportBook(FILE *file, char *path, book_st *output, int numberBooks);
 int main(){
+    FILE *file;
+    char *output_path=".baiTapLon/book.dat";
     book_st *bookList;
     int numberBooks = 3;
     char typeBook[30];
@@ -27,6 +30,7 @@ int main(){
     printTypeBooks(bookList, numberBooks);
     enterType(typeBook);
     print(findBookByType(bookList, numberBooks, typeBook), countBooks(bookList, numberBooks, typeBook));
+    exportBook(file,output_path,bookList,numberBooks);
 }
 void enter(book_st *input){
     printf("\nTen: ");
@@ -91,8 +95,16 @@ void enterType(char typeBook[30]){
     fflush(stdin);
     printf("\nNhap the loai: ");
     gets(typeBook);
+    fflush(stdin);
 }
-int countBooks(book_st *input, int numberBooks, char typeBook[30]){
+book_st *findBookByType(book_st *input, int numberBooks, const char typeBook[30]){
+    for(int i=0; i < numberBooks; i++){
+        if(strcmp((input+i)->type,typeBook)==0){
+            return (input+i);
+        }
+    }
+}
+int countBooks(book_st *input, int numberBooks, const char typeBook[30]){
     int count=0;
     for(int i=0; i < numberBooks; i++){
         if(strcmp((input+i)->type,typeBook)==0){
@@ -101,10 +113,12 @@ int countBooks(book_st *input, int numberBooks, char typeBook[30]){
     }
     return count;
 }
-book_st *findBookByType(book_st *input, int numberBooks, char typeBook[30]){
-    for(int i=0; i < numberBooks; i++){
-        if(strcmp((input+i)->type,typeBook)==0){
-            return (input+i);
+void exportBook(FILE *file, char *path, book_st *output, int numberBooks){
+    char *mode = "a";
+    file = fopen(path,mode);
+    fprintf(file,"\nSTT||Ten\t\t||The loai\t\t||Gia tien");
+        for(int index=0; index < numberBooks; index++){
+            fprintf(file,"\n00%d||%s\t\t||%s\t\t||%d",index+1,(output+index)->name,(output+index)->type,(output+index)->price);
         }
-    }
+    fclose(file);
 }
