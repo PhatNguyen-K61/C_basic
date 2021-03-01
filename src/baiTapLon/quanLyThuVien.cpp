@@ -35,6 +35,7 @@ int main(){
     // print(findBookByType(bookList,numberBooks,totalBooks,search),countBooksByType(bookList,numberBooks,totalBooks,search));
     // exportBook(file,output_path,bookList,numberBooks);
     menu(file,output_path,bookList,numberBooks,totalBooks,search);
+    return EXIT_SUCCESS;
 }
 void enter(book_st *input){
     printf("\nTen: ");
