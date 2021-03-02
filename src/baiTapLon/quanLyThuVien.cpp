@@ -12,11 +12,11 @@ void addBook(book_st *input, int &numberBooks,const book_st book);
 void enterType(char search[30]);
 int comicBooks(book_st *input, int numberBooks);
 int swordHeroBooks(book_st *input, int numberBooks);
-void printTypeBooks(book_st *input, int numberBooks);
+void printTypeBooks(book_st *output, int numberBooks);
 book_st* findBookByType(book_st *input, int numberBooks, int totalBooks, char search[30]);
 int countBooksByType(book_st *input, int numberBooks, char search[30]);
-void print(book_st *input, int numberBooks);
-void arrangeBook(book_st *input, int numberBooks);
+void print(book_st *output, int numberBooks);
+void arrangeBook(book_st *output, int numberBooks);
 void exportBook(FILE *file, char *path, book_st *output, int numberBooks);
 void menu(FILE *file, char *path, book_st *input, int numberBooks,int totalBooks,char search[30]);
 int main(){
@@ -35,6 +35,7 @@ int main(){
     // print(findBookByType(bookList,numberBooks,totalBooks,search),countBooksByType(bookList,numberBooks,totalBooks,search));
     // exportBook(file,output_path,bookList,numberBooks);
     menu(file,output_path,bookList,numberBooks,totalBooks,search);
+    free(bookList);
     return EXIT_SUCCESS;
 }
 void enter(book_st *input){
@@ -72,9 +73,9 @@ int swordHeroBooks(book_st *input, int numberBooks){
     }
     return count;
 }
-void printTypeBooks(book_st *input, int numberBooks){
-    printf("\nTruyen tranh co %d quyen sach", comicBooks(input, numberBooks));
-    printf("\nTruyen kiem hiep co %d quyen sach\n", swordHeroBooks(input, numberBooks));
+void printTypeBooks(book_st *output, int numberBooks){
+    printf("\nTruyen tranh co %d quyen sach", comicBooks(output, numberBooks));
+    printf("\nTruyen kiem hiep co %d quyen sach\n", swordHeroBooks(output, numberBooks));
 }
 void addBook(book_st *input, int &numberBooks,const book_st book){
     numberBooks++;
@@ -108,24 +109,24 @@ int countBooksByType(book_st *input, int numberBooks, char search[30]){
     }
     return count;
 }
-void print(book_st *input,int numberBooks){
+void print(book_st *output,int numberBooks){
     if(numberBooks==0){
         printf("Khong co quyen sach thuoc the loai nay");
     }else{
         printf("\nSTT||Ten\t\t\t||The loai\t\t\t||Gia tien");
         for(int index=0; index < numberBooks; index++){
-            printf("\n00%d||%s\t\t||%s\t\t||%d",index+1,(input+index)->name,(input+index)->type,(input+index)->price);
+            printf("\n00%d||%s\t\t||%s\t\t||%d",index+1,(output+index)->name,(output+index)->type,(output+index)->price);
         }
     }
 }
-void arrangeBook(book_st *input, int numberBooks){
+void arrangeBook(book_st *output, int numberBooks){
     book_st temp;
     for(int i = 0; i < numberBooks-1; i++){
         for(int j = i+1; j <numberBooks; j++){
-            if(strcmp((input+i)->name, (input+j)->name) < 0){
-                temp = *(input+i);
-                *(input+i)= *(input+j);
-                *(input+j) = temp;
+            if(strcmp((output+i)->name, (output+j)->name) < 0){
+                temp = *(output+i);
+                *(output+i)= *(output+j);
+                *(output+j) = temp;
             }
         }
     }
