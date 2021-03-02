@@ -112,7 +112,7 @@ void print(book_st *input,int numberBooks){
     if(numberBooks==0){
         printf("Khong co quyen sach thuoc the loai nay");
     }else{
-        printf("\nSTT||Ten\t\t||The loai\t\t||Gia tien");
+        printf("\nSTT||Ten\t\t\t||The loai\t\t\t||Gia tien");
         for(int index=0; index < numberBooks; index++){
             printf("\n00%d||%s\t\t||%s\t\t||%d",index+1,(input+index)->name,(input+index)->type,(input+index)->price);
         }
@@ -133,7 +133,7 @@ void arrangeBook(book_st *input, int numberBooks){
 void exportBook(FILE *file, char *path, book_st *output, int numberBooks){
     char *mode = "a";
     file = fopen(path,mode);
-    fprintf(file,"\nSTT||Ten\t\t||The loai\t\t||Gia tien");
+    fprintf(file,"\nSTT||Ten\t\t\t\t\t||The loai\t\t\t\t\t||Gia tien");
         for(int index=0; index < numberBooks; index++){
             fprintf(file,"\n00%d||%s\t\t||%s\t\t||%d",index+1,(output+index)->name,(output+index)->type,(output+index)->price);
         }
