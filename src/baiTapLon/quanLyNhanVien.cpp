@@ -36,10 +36,10 @@ void enterEmployees(employee_st *input, int numberOfEmployee){
 }
 void print(employee_st *output, int numberOfEmployee){
     printf("\n|-----------------------|-----------------------|------------|");
-    printf("\n|Name\t\t\t|Province\t\t|Year\t     |");
+    printf("\n|\tName\t\t|\tProvince\t|Year\t     |");
     printf("\n|-----------------------|-----------------------|------------|");
     for(int i=0; i < numberOfEmployee; i++){
-        printf("\n|%s\t\t|%s\t\t|%d\t     |",(output+i)->name,(output+i)->province,(output+i)->year);
+        printf("\n|%15s\t|%15s\t|%d\t     |",(output+i)->name,(output+i)->province,(output+i)->year);
         printf("\n|-----------------------|-----------------------|------------|");
     }
 }
