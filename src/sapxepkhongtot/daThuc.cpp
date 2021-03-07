@@ -3,8 +3,8 @@
 void enter(int &n);
 void enterA(int a[], int n);
 void print(int a[], int n);
-void enterX(int &x);
-int caculate(int a[], int x, int n);
+void enterX(int &x);//bài này a sửa cho Minh rồi á. e hỏi nó. tại a code thì nó khác dữ lắm ý nên có thể phân tích style.
+int caculate(int a[], int x, int n);//REVIEW: a,n,x sắp xếp những cái liên quan gần nhau
 void printSum(int a[], int x, int n);
 int main()
 {
