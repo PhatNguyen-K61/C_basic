@@ -76,7 +76,7 @@ void derivative(int a[], int n){
         if(i>0){
             printf("%dx^%d+", a[i]*i, i);
         }else{
-            printf("%d^%d=", a[i]*i, i);
+            printf("%d^%d=", a[i], i);
         }
     }
     printf("0");
