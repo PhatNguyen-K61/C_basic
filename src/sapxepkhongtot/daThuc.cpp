@@ -1,30 +1,37 @@
 #include<stdio.h>
 #include<math.h>
 void enter(int &n);
-void enterA(int a[], int n);
+void enterPolynomial(int a[], int n);
 void print(int a[], int n);
-void enterX(int &x);//bài này a sửa cho Minh rồi á. e hỏi nó. tại a code thì nó khác dữ lắm ý nên có thể phân tích style.
-int caculate(int a[], int x, int n);//REVIEW: a,n,x sắp xếp những cái liên quan gần nhau
+void enterX(int &x);
+float caculate(int a[], int x, int n);
 void printSum(int a[], int x, int n);
+void derivative(int a[], int n);
 int main()
 {
-int a[100], b[100],n, m, x1, x2;
+    int a[100], b[100],n, m, x1, x2;
     enter(n);
-    enterA(a,n);
+    enterPolynomial(a,n);
     enter(m);
-    enterA(b, m);
+    enterPolynomial(b, m);
     print(a,n);
     print(b, m);
+    derivative(a,n);
+    derivative(b,n);
     enterX(x1);
     enterX(x2);
     printSum(a, x1, n);
     printSum(b, x2, m);
+    printf("Tong 2 da thuc la: %.1f",caculate(a,x1,n)+caculate(b,x2,m));
+    printf("\nHieu 2 da thuc la: %.1f",caculate(a,x1,n)-caculate(b,x2,m));
+    printf("\nTich 2 da thuc la: %.1f",caculate(a,x1,n)*caculate(b,x2,m));
+    printf("\nThuong 2 da thuc la: %.2f\n",caculate(a,x1,n)/caculate(b,x2,m));
 }
 void enter(int &n){
     printf("Nhap bac cua da thuc: ");
     scanf("%d", &n);
 }
-void enterA(int a[], int n){
+void enterPolynomial(int a[], int n){
     for(int i=0;i<=n;i++){
     printf("Nhap gia tri x^%d\n",i);
     scanf("%d",&a[i]); 
@@ -42,11 +49,11 @@ void print(int a[], int n){
     printf("\n");
 }
 void enterX(int &x){
-    printf("\nNhap x: ");
+    printf("Nhap x: ");
     scanf("%d", &x);
 }
-int caculate(int a[], int x, int n){
-    int sum =0;
+float caculate(int a[], int x, int n){
+    float sum =0;
     for(int i=0;i<=n;i++){
         sum+=a[i]*pow(x,i);
     }
@@ -61,5 +68,17 @@ void printSum(int a[], int x, int n){
         }
     }
     printf("%d",caculate(a,x,n));
+    printf("\n");
+}
+void derivative(int a[], int n){
+    //dao ham
+    for(int i=n-1;i>=0; i--){
+        if(i>0){
+            printf("%dx^%d+", a[i]*i, i);
+        }else{
+            printf("%d^%d=", a[i]*i, i);
+        }
+    }
+    printf("0");
     printf("\n");
 }
