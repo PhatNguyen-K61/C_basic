@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-struct Date{
+struct Date
+{
     int day;
     int month;
     int year;
 };
-struct Author{
+struct Author
+{
     char name[30];
     Date *birthday;
 };
@@ -53,7 +55,8 @@ int main()
     free(bookList);
     return EXIT_SUCCESS;
 }
-bool validDay(Date *check){
+bool validDay(Date *check)
+{
     //kiểm tra ngày tháng
     bool validDay = true;
     if (check->month < 0 || check->month > 12)
@@ -95,7 +98,8 @@ bool validDay(Date *check){
     }
     return validDay;
 }
-void enter(Date *input){
+void enter(Date *input)
+{
     printf("\nNgay: ");
     scanf("%d", &input->day);
     printf("Thang: ");
@@ -103,14 +107,16 @@ void enter(Date *input){
     printf("Nam: ");
     scanf("%d", &input->year);
 }
-void enter(Author *input){
+void enter(Author *input)
+{
     printf("\nNhap ten tac gia: ");
     gets(input->name);
     printf("Nhap ngay thang nam sinh tac gia: ");
-    do{
-    input->birthday = (Date *)malloc(sizeof(Date));
-    enter(input->birthday);
-    }while(!validDay(input->birthday));
+    do
+    {
+        input->birthday = (Date *)malloc(sizeof(Date));
+        enter(input->birthday);
+    } while (!validDay(input->birthday));
 }
 void enter(book_st *input)
 {
@@ -217,7 +223,7 @@ void print(book_st *output, int numberBooks)
         printf("\nSTT||Ten\t\t\t||Tac gia\t\t\t\t||The loai\t\t\t||Gia tien");
         for (int index = 0; index < numberBooks; index++)
         {
-            printf("\n00%d||%-20s\t||Ten:%-20s(%d, %d, %d) ||%-15s\t\t||%d", index + 1, (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year,(output + index)->type, (output + index)->price);
+            printf("\n00%d||%-20s\t||Ten:%-20s(%d, %d, %d) ||%-15s\t\t||%d", index + 1, (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year, (output + index)->type, (output + index)->price);
         }
     }
 }
@@ -244,7 +250,7 @@ void exportBook(FILE *file, char *path, book_st *output, int numberBooks)
     fprintf(file, "\nSTT||Ten\t\t\t\t\t||Tac gia\t\t\t\t\t\t\t\t||The loai\t\t\t\t||Gia tien");
     for (int index = 0; index < numberBooks; index++)
     {
-        fprintf(file, "\n00%d||%-20s\t||Ten:%-20s(%d, %d, %d) ||%-15s\t\t||%d", index + 1, (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year,(output + index)->type, (output + index)->price);
+        fprintf(file, "\n00%d||%-20s\t||Ten:%-20s(%d, %d, %d) ||%-15s\t\t||%d", index + 1, (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year, (output + index)->type, (output + index)->price);
     }
     fclose(file);
 }
