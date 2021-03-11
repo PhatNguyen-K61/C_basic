@@ -1,0 +1,1 @@
+hàm set,get hỗ trợ cho tính đóng gói, bảo mật dữ liệu trong hướng đối tượng.
