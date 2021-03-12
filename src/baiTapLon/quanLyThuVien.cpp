@@ -43,7 +43,7 @@ int main()
     int numberBooks;
     int totalBooks;
     char search[30];
-    bookList = (book_st *)calloc(numberBooks, sizeof(book_st));
+    bookList = (book_st *)malloc(sizeof(book_st));
     //enterBooks(bookList,numberBooks);
     // arrangeBook(bookList,numberBooks);
     // print(bookList, numberBooks);
@@ -89,7 +89,7 @@ bool validDay(Date *check)
             }
             break;
         case 2:
-            if ((check->year % 4 == 0) && (check->day < 1 || check->day > 29))
+            if (check->year % 4 == 0 && check->day < 1 || check->day > 29)
             {
                 validDay = false;
             }

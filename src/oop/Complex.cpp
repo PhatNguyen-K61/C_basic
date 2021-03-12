@@ -7,6 +7,7 @@ class Complex{
     public:
         //TODO: xây dựng constructor
         Complex(); //NOTE: khởi tạo mặc định
+        ~Complex();//hàm hủy
         Complex(float realPart, float imagPart);//khởi tạo đầy đủ đối số
         Complex(const Complex &other);
         // TODO: xây dựng setter,getter
