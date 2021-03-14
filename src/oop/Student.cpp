@@ -49,11 +49,11 @@ class Students{
             count = 0;
         }
         void add(Student student){
-                this->students.push_back(student);
-                count++;
+                this->students.push_back(student);// NOTE: thêm 1 studnet vào cuối vector
+                count++;//NOTE: số lượng phần tử trong vector sẽ tăng lên 1
         }
         void print(){
-            for (auto student = students.begin(); student != students.end(); ++student) {
+            for (auto student = students.begin(); student != students.end(); ++student) {//NOTE: đi từ đầu đến cuối vector để in từng phần tử
                 student->print();
                 cout<<endl;
             }
