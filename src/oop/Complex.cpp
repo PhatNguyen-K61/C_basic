@@ -5,24 +5,26 @@ class Complex{
         float realPart;
         float imagPart;
     public:
-        //TODO: xây dựng constructor
+        //NOTE: xây dựng constructor
         Complex(); //NOTE: khởi tạo mặc định
-        ~Complex();//hàm hủy
+        ~Complex(){
+            cout << "đã gọi hàm hủy của "<<this<<endl;
+        }
         Complex(float realPart, float imagPart);//khởi tạo đầy đủ đối số
         Complex(const Complex &other);
-        // TODO: xây dựng setter,getter
+        //  NOTE: xây dựng setter,getter
         void setRealPart(float realPart);
         void setImagPart(float imagPart);
         float getRealPart();
         float getImagPart();
-        //TODO: xây dựng nạp chồng toán tử
+        //NOTE: xây dựng nạp chồng toán tử
         friend istream &operator>>(istream &input, Complex &complex);
         friend ostream &operator<<(ostream &output,const Complex complex);
         Complex operator+(const Complex &other);
         Complex operator-(const Complex &other);
         Complex operator*(const Complex &other);
         Complex operator/(const Complex &other);
-        // TODO: cộng, trừ, nhân, chia 2 số phức
+        // NOTE: cộng, trừ, nhân, chia 2 số phức
         Complex add(const Complex other);
         Complex sub(const Complex other);
         // TODO: xây dựng hàm so sánh
