@@ -50,9 +50,7 @@ ostream &operator<<(ostream &output,const Polynomial polynomial){
 }
 Polynomial Polynomial::operator+(const Polynomial &other){
     Polynomial result;
-    for(int index = this->exponential; index>=0; index--){
-        
-    }
+    
 }
 int main(){
     int coefficient[4] = {4,3,2,1};// a0,a1,a2,a3

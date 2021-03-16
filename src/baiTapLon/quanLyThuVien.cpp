@@ -23,11 +23,12 @@ void enter(Date *input);
 bool validDay(Date *check);
 void enter(book_st *input);
 void enter(Author *input);
-void enterBooks(book_st *input, int &numberBooks);
+void enterBooks(book_st *&input, int &numberBooks);
 void addBook(book_st *input, int &numberBooks, const book_st book);
 void enterType(char search[30]);
 int comicBooks(book_st *input, int numberBooks);
 int swordHeroBooks(book_st *input, int numberBooks);
+int curriculums(book_st *input, int numberBooks);
 void printTypeBooks(book_st *output, int numberBooks);
 book_st *findBookByType(book_st *input, int numberBooks, int totalBooks, char search[30]);
 int countBooksByType(book_st *input, int numberBooks, char search[30]);
@@ -111,7 +112,7 @@ void enter(Author *input)
 {
     printf("\nNhap ten tac gia: ");
     gets(input->name);
-    printf("Nhap ngay thang nam sinh tac gia: ");
+    printf("-------- Nhap ngay thang nam sinh tac gia --------");
     do
     {
         input->birthday = (Date *)malloc(sizeof(Date));
@@ -123,7 +124,7 @@ void enter(book_st *input)
     printf("\nTen: ");
     fflush(stdin);
     gets(input->name);
-    printf("Nhap thong tin tac gia: ");
+    printf("******** Nhap thong tin tac gia ********");
     input->author = (Author *)malloc(sizeof(Author));
     enter(input->author);
     fflush(stdin);
@@ -132,14 +133,14 @@ void enter(book_st *input)
     printf("Gia tien: ");
     scanf("%d", &input->price);
 }
-void enterBooks(book_st *input, int &numberBooks)
+void enterBooks(book_st *&input, int &numberBooks)
 {
-    printf("Nhap so cuon sach: ");
+    printf("->Nhap so cuon sach: ");
     scanf("%d", &numberBooks);
     input = (book_st *)realloc(input, (numberBooks) * sizeof(book_st));
     for (int index = 0; index < numberBooks; index++)
     {
-        printf("\nNhap quyen sach %d", index + 1);
+        printf("\n++++++++ Nhap thong tin quyen sach %d ++++++++", index + 1);
         enter(&*(input + index));
     }
 }
@@ -167,10 +168,20 @@ int swordHeroBooks(book_st *input, int numberBooks)
     }
     return count;
 }
+int curriculums(book_st *input, int numberBooks){
+    int count =0;
+    for(int i=0; i<numberBooks; i++){
+        if(strcmp((input + i)->type, "giao trinh")==0){
+            count++;
+        }
+    }
+    return count;
+}
 void printTypeBooks(book_st *output, int numberBooks)
 {
     printf("\nTruyen tranh co %d quyen sach", comicBooks(output, numberBooks));
-    printf("\nTruyen kiem hiep co %d quyen sach\n", swordHeroBooks(output, numberBooks));
+    printf("\nTruyen kiem hiep co %d quyen sach", swordHeroBooks(output, numberBooks));
+    printf("\nGiao trinh co %d quyen sach\n", curriculums(output, numberBooks));
 }
 void addBook(book_st *input, int &numberBooks, const book_st book)
 {
@@ -220,10 +231,10 @@ void print(book_st *output, int numberBooks)
     }
     else
     {
-        printf("\nSTT||Ten\t\t\t||Tac gia\t\t\t\t||The loai\t\t\t||Gia tien");
+        printf("\nSTT||Ten\t\t||Tac gia\t\t\t ||The loai\t\t||Gia tien");
         for (int index = 0; index < numberBooks; index++)
         {
-            printf("\n00%d||%-20s\t||Ten:%-20s(%d, %d, %d) ||%-15s\t\t||%d", index + 1, (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year, (output + index)->type, (output + index)->price);
+            printf("\n00%d||%-17s\t||%-17s(%d/ %d/ %d) ||%-17s\t||%d", (index + 1), (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year, (output + index)->type, (output + index)->price);
         }
     }
 }
@@ -247,10 +258,10 @@ void exportBook(FILE *file, char *path, book_st *output, int numberBooks)
 {
     char *mode = "a";
     file = fopen(path, mode);
-    fprintf(file, "\nSTT||Ten\t\t\t\t\t||Tac gia\t\t\t\t\t\t\t\t||The loai\t\t\t\t||Gia tien");
+    fprintf(file, "\nSTT||Ten\t\t\t\t\t||Tac gia\t\t\t\t\t\t\t||The loai\t\t\t\t||Gia tien");
     for (int index = 0; index < numberBooks; index++)
     {
-        fprintf(file, "\n00%d||%-20s\t||Ten:%-20s(%d, %d, %d) ||%-15s\t\t||%d", index + 1, (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year, (output + index)->type, (output + index)->price);
+        fprintf(file, "\n00%d||%-20s\t||%-20s(%d/ %d/ %d) ||%-15s\t\t||%d", index + 1, (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year, (output + index)->type, (output + index)->price);
     }
     fclose(file);
 }
@@ -266,7 +277,7 @@ void menu(FILE *file, char *path, book_st *input, int numberBooks, int totalBook
         printf("4. Ghi vao tap tin nhi phan book.dat.\n");
         printf("5. Thoat\n");
         printf("-------------------------------------------------\n");
-        printf("Your choise: ");
+        printf("Lua chon cua ban: ");
         scanf("%d", &choise);
         switch (choise)
         {
