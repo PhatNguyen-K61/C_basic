@@ -45,13 +45,6 @@ int main()
     int totalBooks;
     char search[30];
     bookList = (book_st *)malloc(sizeof(book_st));
-    //enterBooks(bookList,numberBooks);
-    // arrangeBook(bookList,numberBooks);
-    // print(bookList, numberBooks);
-    // printTypeBooks(bookList,numberBooks);
-    // enterType(search);
-    // print(findBookByType(bookList,numberBooks,totalBooks,search),countBooksByType(bookList,numberBooks,totalBooks,search));
-    // exportBook(file,output_path,bookList,numberBooks);
     menu(file, output_path, bookList, numberBooks, totalBooks, search);
     free(bookList);
     return EXIT_SUCCESS;
@@ -168,10 +161,13 @@ int swordHeroBooks(book_st *input, int numberBooks)
     }
     return count;
 }
-int curriculums(book_st *input, int numberBooks){
-    int count =0;
-    for(int i=0; i<numberBooks; i++){
-        if(strcmp((input + i)->type, "giao trinh")==0){
+int curriculums(book_st *input, int numberBooks)
+{
+    int count = 0;
+    for (int i = 0; i < numberBooks; i++)
+    {
+        if (strcmp((input + i)->type, "giao trinh") == 0)
+        {
             count++;
         }
     }
