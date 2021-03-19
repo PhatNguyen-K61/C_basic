@@ -30,6 +30,7 @@ int comicBooks(book_st *input, int numberBooks);
 int swordHeroBooks(book_st *input, int numberBooks);
 int curriculums(book_st *input, int numberBooks);
 void printTypeBooks(book_st *output, int numberBooks);
+void editBook(book_st *output, int numberBooks);
 book_st *findBookByType(book_st *input, int numberBooks, int totalBooks, char search[30]);
 int countBooksByType(book_st *input, int numberBooks, char search[30]);
 void print(book_st *output, int numberBooks);
@@ -179,6 +180,38 @@ void printTypeBooks(book_st *output, int numberBooks)
     printf("\nTruyen kiem hiep co %d quyen sach", swordHeroBooks(output, numberBooks));
     printf("\nGiao trinh co %d quyen sach\n", curriculums(output, numberBooks));
 }
+void editBook(book_st *output, int numberBooks){
+    char book_name[30];
+    int count = 0;
+    printf("Nhap ten quyen sach can sua: ");
+    fflush(stdin);
+    gets(book_name);
+    for(int index = 0; index < numberBooks; index++){
+        if(strcmp(book_name, (output + index)->name) == 0){
+            count ++;
+        }
+    }
+    if(count != 0){
+        for(int index = 0; index < numberBooks; index++){
+            if(strcmp(book_name, (output + index)->name) == 0){
+                printf("\n======== Sua thong tin sach ========");
+                printf("\nTen: ");
+                gets((output + index)->name);
+                printf("******** Nhap thong tin tac gia ********");
+                (output + index)->author = (Author *)malloc(sizeof(Author));
+                enter((output + index)->author);
+                fflush(stdin);
+                printf("\nThe loai: ");
+                gets((output + index)->type);
+                printf("Gia tien: ");
+                scanf("%d", &(output+index)->price);
+                printf("\nDa hoan tat sua thong tin quyen sach nay !");
+            }
+        }
+    }else{
+        printf("\nKhong co quyen sach nay !");
+    }
+}
 void addBook(book_st *input, int &numberBooks, const book_st book)
 {
     numberBooks++;
@@ -269,9 +302,10 @@ void menu(FILE *file, char *path, book_st *input, int numberBooks, int totalBook
         printf("\n-----------------------Menu--------------------\n");
         printf("1. Nhap du lieu cua tung quyen sach.\n");
         printf("2. Sap xep, thong kê va hien thi thong tin chi tiet cua tung quyen sach theo the loai (Z->A).\n");
-        printf("3. Tim  quyen sach theo the loai\n");
-        printf("4. Ghi vao tap tin nhi phan book.dat.\n");
-        printf("5. Thoat\n");
+        printf("3. Sua thong tin sach\n");
+        printf("4. Tim  quyen sach theo the loai\n");
+        printf("5. Ghi vao tap tin nhi phan book.dat.\n");
+        printf("6. Thoat\n");
         printf("-------------------------------------------------\n");
         printf("Lua chon cua ban: ");
         scanf("%d", &choise);
@@ -286,17 +320,20 @@ void menu(FILE *file, char *path, book_st *input, int numberBooks, int totalBook
             printTypeBooks(input, numberBooks);
             break;
         case 3:
+            editBook(input, numberBooks);
+            break;
+        case 4:
             enterType(search);
             print(findBookByType(input, numberBooks, totalBooks, search), countBooksByType(input, numberBooks, search));
             break;
-        case 4:
+        case 5:
             exportBook(file, path, input, numberBooks);
             break;
-        case 5:
+        case 6:
             break;
         default:
             printf("Hay nhap lai\n");
             break;
         }
-    } while (choise != 5);
+    } while (choise != 6);
 }
