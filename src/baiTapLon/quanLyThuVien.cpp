@@ -31,13 +31,15 @@ int comicBooks(book_st *input, int numberBooks);
 int swordHeroBooks(book_st *input, int numberBooks);
 int curriculums(book_st *input, int numberBooks);
 void printTypeBooks(book_st *output, int numberBooks);
-void editBook(book_st *output, int numberBooks);
+int check_id(book_st *input,int &id_need_to_find, int numberBooks);
+void editBook(book_st *output, int id_need_to_find, int numberBooks);
+void removeBook(book_st *output, int id_need_to_find,int &numberBooks);
 book_st *findBookByType(book_st *input, int numberBooks, int totalBooks, char search[30]);
 int countBooksByType(book_st *input, int numberBooks, char search[30]);
 void print(book_st *output, int numberBooks);
 void arrangeBook(book_st *output, int numberBooks);
 void exportBook(FILE *file, char *path, book_st *output, int numberBooks);
-void menu(FILE *file, char *path, book_st *input, int numberBooks, int totalBooks, char search[30]);
+void menu(FILE *file, char *path, book_st *input, int numberBooks, int totalBooks, char search[30], int id_need_to_find);
 int main()
 {
     FILE *file;
@@ -46,8 +48,9 @@ int main()
     int numberBooks;
     int totalBooks;
     char search[30];
+    int id_need_to_find;
     bookList = (book_st *)malloc(sizeof(book_st));
-    menu(file, output_path, bookList, numberBooks, totalBooks, search);
+    menu(file, output_path, bookList, numberBooks, totalBooks, search, id_need_to_find);
     free(bookList);
     return EXIT_SUCCESS;
 }
@@ -119,10 +122,10 @@ void enter(book_st *input)
     printf("\nNhap id cua sach: ");
     fflush(stdin);
     scanf("%d", &input->id);
-    printf("\nTen: ");
+    printf("Ten: ");
     fflush(stdin);
     gets(input->name);
-    printf("******** Nhap thong tin tac gia ********");
+    printf("************** Nhap thong tin tac gia **************");
     input->author = (Author *)malloc(sizeof(Author));
     enter(input->author);
     fflush(stdin);
@@ -138,7 +141,7 @@ void enterBooks(book_st *&input, int &numberBooks)
     input = (book_st *)realloc(input, (numberBooks) * sizeof(book_st));
     for (int index = 0; index < numberBooks; index++)
     {
-        printf("\n++++++++ Nhap thong tin quyen sach %d ++++++++", index + 1);
+        printf("\n++++++++++++++++ Nhap thong tin quyen sach %d ++++++++++++++++", index + 1);
         enter(&*(input + index));
     }
 }
@@ -184,27 +187,29 @@ void printTypeBooks(book_st *output, int numberBooks)
     printf("\nTruyen kiem hiep co %d quyen sach", swordHeroBooks(output, numberBooks));
     printf("\nGiao trinh co %d quyen sach\n", curriculums(output, numberBooks));
 }
-void editBook(book_st *output, int numberBooks)
-{
-    int id_need_to_find;
+int check_id(book_st *input, int &id_need_to_find, int numberBooks){
     int count = 0;
-    printf("Nhap id quyen sach can sua: ");
-    fflush(stdin);
+    printf("Nhap id quyen sach: ");
     scanf("%d", &id_need_to_find);
     for (int index = 0; index < numberBooks; index++)
     {
-        if (id_need_to_find == (output + index)->id)
+        if (id_need_to_find == (input + index)->id)
         {
             count++;
         }
     }
-    if (count != 0)
+    return count;
+}
+void editBook(book_st *output, int id_need_to_find, int numberBooks)
+{
+    if (check_id(output, id_need_to_find, numberBooks) != 0)
     {
         for (int index = 0; index < numberBooks; index++)
         {
             if (id_need_to_find == (output + index)->id)
             {
                 printf("\n======== Sua thong tin sach ========");
+                fflush(stdin);
                 printf("\nTen: ");
                 gets((output + index)->name);
                 printf("******** Nhap thong tin tac gia ********");
@@ -221,7 +226,20 @@ void editBook(book_st *output, int numberBooks)
     }
     else
     {
-        printf("\nKhong co quyen sach nay !");
+        printf("Khong co quyen sach nay !");
+    }
+}
+void removeBook(book_st *output, int id_need_to_find, int &numberBooks){
+    if (check_id(output, id_need_to_find, numberBooks) != 0)
+    {
+        for (int index = id_need_to_find; index <= numberBooks-1; index++)
+        {
+            *(output + index) = *(output + index+1);
+            numberBooks--;
+        }
+        printf("Da xoa sach nay");
+    }else{
+        printf("Khong co quyen sach nay !");
     }
 }
 void addBook(book_st *input, int &numberBooks, const book_st book)
@@ -306,19 +324,20 @@ void exportBook(FILE *file, char *path, book_st *output, int numberBooks)
     }
     fclose(file);
 }
-void menu(FILE *file, char *path, book_st *input, int numberBooks, int totalBooks, char search[30])
+void menu(FILE *file, char *path, book_st *input, int numberBooks, int totalBooks, char search[30], int id_need_to_find)
 {
     int choise;
     do
     {
-        printf("\n-----------------------Menu--------------------\n");
+        printf("\n---------------------------MENU------------------------\n");
         printf("1. Nhap du lieu cua tung quyen sach.\n");
-        printf("2. Sap xep, thong kê va hien thi thong tin chi tiet cua tung quyen sach theo the loai (Z->A).\n");
+        printf("2. Sap xep, thong ke va hien thi thong tin\n   chi tiet cua tung quyen sach theo the loai (Z->A).\n");
         printf("3. Sua thong tin sach\n");
-        printf("4. Tim  quyen sach theo the loai\n");
-        printf("5. Ghi vao tap tin nhi phan book.dat.\n");
-        printf("6. Thoat\n");
-        printf("-------------------------------------------------\n");
+        printf("4. Xoa thong tin sach\n");
+        printf("5. Tim  quyen sach theo the loai\n");
+        printf("6. Ghi vao tap tin nhi phan book.dat.\n");
+        printf("7. Thoat\n");
+        printf("--------------------------------------------------------\n");
         printf("Lua chon cua ban: ");
         scanf("%d", &choise);
         switch (choise)
@@ -332,20 +351,23 @@ void menu(FILE *file, char *path, book_st *input, int numberBooks, int totalBook
             printTypeBooks(input, numberBooks);
             break;
         case 3:
-            editBook(input, numberBooks);
+            editBook(input, id_need_to_find, numberBooks);
             break;
         case 4:
+            removeBook(input, id_need_to_find, numberBooks);
+            break;
+        case 5:
             enterType(search);
             print(findBookByType(input, numberBooks, totalBooks, search), countBooksByType(input, numberBooks, search));
             break;
-        case 5:
+        case 6:
             exportBook(file, path, input, numberBooks);
             break;
-        case 6:
+        case 7:
             break;
         default:
             printf("Hay nhap lai\n");
             break;
         }
-    } while (choise != 6);
+    } while (choise != 7);
 }
