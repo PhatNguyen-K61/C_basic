@@ -14,6 +14,7 @@ struct Author
 };
 struct book_st
 {
+    int id;
     char name[30];
     Author *author;
     char type[30];
@@ -115,6 +116,9 @@ void enter(Author *input)
 }
 void enter(book_st *input)
 {
+    printf("\nNhap id cua sach: ");
+    fflush(stdin);
+    scanf("%d", &input->id);
     printf("\nTen: ");
     fflush(stdin);
     gets(input->name);
@@ -180,20 +184,26 @@ void printTypeBooks(book_st *output, int numberBooks)
     printf("\nTruyen kiem hiep co %d quyen sach", swordHeroBooks(output, numberBooks));
     printf("\nGiao trinh co %d quyen sach\n", curriculums(output, numberBooks));
 }
-void editBook(book_st *output, int numberBooks){
-    char book_name[30];
+void editBook(book_st *output, int numberBooks)
+{
+    int id_need_to_find;
     int count = 0;
-    printf("Nhap ten quyen sach can sua: ");
+    printf("Nhap id quyen sach can sua: ");
     fflush(stdin);
-    gets(book_name);
-    for(int index = 0; index < numberBooks; index++){
-        if(strcmp(book_name, (output + index)->name) == 0){
-            count ++;
+    scanf("%d", &id_need_to_find);
+    for (int index = 0; index < numberBooks; index++)
+    {
+        if (id_need_to_find == (output + index)->id)
+        {
+            count++;
         }
     }
-    if(count != 0){
-        for(int index = 0; index < numberBooks; index++){
-            if(strcmp(book_name, (output + index)->name) == 0){
+    if (count != 0)
+    {
+        for (int index = 0; index < numberBooks; index++)
+        {
+            if (id_need_to_find == (output + index)->id)
+            {
                 printf("\n======== Sua thong tin sach ========");
                 printf("\nTen: ");
                 gets((output + index)->name);
@@ -204,11 +214,13 @@ void editBook(book_st *output, int numberBooks){
                 printf("\nThe loai: ");
                 gets((output + index)->type);
                 printf("Gia tien: ");
-                scanf("%d", &(output+index)->price);
+                scanf("%d", &(output + index)->price);
                 printf("\nDa hoan tat sua thong tin quyen sach nay !");
             }
         }
-    }else{
+    }
+    else
+    {
         printf("\nKhong co quyen sach nay !");
     }
 }
@@ -260,10 +272,10 @@ void print(book_st *output, int numberBooks)
     }
     else
     {
-        printf("\nSTT||Ten\t\t||Tac gia\t\t\t ||The loai\t\t||Gia tien");
+        printf("\nId ||Ten\t\t||Tac gia\t\t\t ||The loai\t\t||Gia tien");
         for (int index = 0; index < numberBooks; index++)
         {
-            printf("\n00%d||%-17s\t||%-17s(%d/ %d/ %d) ||%-17s\t||%d", (index + 1), (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year, (output + index)->type, (output + index)->price);
+            printf("\n%-3d||%-17s\t||%-17s(%d/ %d/ %d) ||%-17s\t||%d", (output+index)->id, (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year, (output + index)->type, (output + index)->price);
         }
     }
 }
@@ -287,10 +299,10 @@ void exportBook(FILE *file, char *path, book_st *output, int numberBooks)
 {
     char *mode = "a";
     file = fopen(path, mode);
-    fprintf(file, "\nSTT||Ten\t\t\t\t\t||Tac gia\t\t\t\t\t\t\t||The loai\t\t\t\t||Gia tien");
+    fprintf(file, "\nId ||Ten\t\t\t\t\t||Tac gia\t\t\t\t\t\t\t||The loai\t\t\t\t||Gia tien");
     for (int index = 0; index < numberBooks; index++)
     {
-        fprintf(file, "\n00%d||%-20s\t||%-20s(%d/ %d/ %d) ||%-15s\t\t||%d", index + 1, (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year, (output + index)->type, (output + index)->price);
+        fprintf(file, "\n%d||%-20s\t||%-20s(%d/ %d/ %d) ||%-15s\t\t||%d", (output + index)->id, (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year, (output + index)->type, (output + index)->price);
     }
     fclose(file);
 }
