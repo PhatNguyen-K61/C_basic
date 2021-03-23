@@ -45,7 +45,7 @@ int main()
     FILE *file;
     char *output_path = "./src/baiTapLon/book.dat";
     book_st *bookList;
-    int numberBooks;
+    int numberBooks=0;
     int totalBooks;
     char search[30];
     int id_need_to_find;
@@ -330,14 +330,14 @@ void menu(FILE *file, char *path, book_st *input, int numberBooks, int totalBook
     do
     {
         printf("\n---------------------------MENU------------------------\n");
-        printf("1. Nhap du lieu cua tung quyen sach.\n");
-        printf("2. Sap xep, thong ke va hien thi thong tin\n   chi tiet cua tung quyen sach theo the loai (Z->A).\n");
-        printf("3. Sua thong tin sach\n");
-        printf("4. Xoa thong tin sach\n");
-        printf("5. Tim  quyen sach theo the loai\n");
-        printf("6. Ghi vao tap tin nhi phan book.dat.\n");
-        printf("7. Thoat\n");
-        printf("--------------------------------------------------------\n");
+        printf("|1. Nhap du lieu cua tung quyen sach.\t\t      |\n");
+        printf("|2. Sap xep, thong ke va hien thi thong tin\t      |\n|   chi tiet cua tung quyen sach theo the loai (Z->A).|\n");
+        printf("|3. Sua thong tin sach\t\t\t\t      |\n");
+        printf("|4. Xoa thong tin sach\t\t\t\t      |\n");
+        printf("|5. Tim  quyen sach theo the loai\t\t      |\n");
+        printf("|6. Ghi vao tap tin nhi phan book.dat.\t\t      |\n");
+        printf("|7. Thoat\t\t\t\t\t      |\n");
+        printf("-------------------------------------------------------\n");
         printf("Lua chon cua ban: ");
         scanf("%d", &choise);
         switch (choise)
