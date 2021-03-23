@@ -134,9 +134,14 @@ void enter(book_st *input)
     scanf("%d", &input->price);
 }
 void enterBooks(book_st *&input, int &numberBooks)
-{
+{   
+    do{
     printf("->Nhap so cuon sach: ");
     scanf("%d", &numberBooks);
+    if(numberBooks<= 0){
+        printf("Hay nhap lai !\n");
+    }
+    }while(numberBooks<=0);
     input = (book_st *)realloc(input, (numberBooks) * sizeof(book_st));
     for (int index = 0; index < numberBooks; index++)
     {
@@ -334,7 +339,7 @@ void menu(FILE *file, char *path, book_st *input, int numberBooks, int totalBook
         printf("|2. Sap xep, thong ke va hien thi thong tin\t      |\n|   chi tiet cua tung quyen sach theo the loai (Z->A).|\n");
         printf("|3. Sua thong tin sach\t\t\t\t      |\n");
         printf("|4. Xoa thong tin sach\t\t\t\t      |\n");
-        printf("|5. Tim quyen sach theo the loai\t\t       |\n");
+        printf("|5. Tim quyen sach theo the loai\t\t      |\n");
         printf("|6. Ghi vao tap tin nhi phan book.dat.\t\t      |\n");
         printf("|7. Thoat\t\t\t\t\t      |\n");
         printf("|-----------------------------------------------------|\n");
