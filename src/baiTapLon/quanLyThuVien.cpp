@@ -31,9 +31,8 @@ int comicBooks(book_st *input, int numberBooks);
 int swordHeroBooks(book_st *input, int numberBooks);
 int curriculums(book_st *input, int numberBooks);
 void printTypeBooks(book_st *output, int numberBooks);
-//bool existBook(book_st *input,int &id_need_to_find, int numberBooks);
 void editBook(book_st *output, int &id_need_to_find, int numberBooks);
-void removeBook(book_st *output, int &id_need_to_find,int &numberBooks);
+void removeBook(book_st *output, int &id_need_to_find, int &numberBooks);
 book_st *findBookByType(book_st *input, int numberBooks, int totalBooks, char search[30]);
 int countBooksByType(book_st *input, int numberBooks, char search[30]);
 void print(book_st *output, int numberBooks);
@@ -45,7 +44,7 @@ int main()
     FILE *file;
     char *output_path = "./src/baiTapLon/book.dat";
     book_st *bookList;
-    int numberBooks=0;
+    int numberBooks = 0;
     int totalBooks;
     char search[30];
     int id_need_to_find;
@@ -187,66 +186,59 @@ void printTypeBooks(book_st *output, int numberBooks)
     printf("\nTruyen kiem hiep co %d quyen sach", swordHeroBooks(output, numberBooks));
     printf("\nGiao trinh co %d quyen sach\n", curriculums(output, numberBooks));
 }
-// bool existBook(book_st *input, int id_need_to_find, int numberBooks){
-//     bool has_book = false;
-//     for (int index = 0; index < numberBooks; index++)
-//     {
-//         if (id_need_to_find == (input + index)->id)
-//         {
-//             has_book = true;
-//             break;
-//         }
-//     }
-//     return has_book;
-// }
 void editBook(book_st *output, int &id_need_to_find, int numberBooks)
 {
     int has_book = false;
     printf("Nhap id quyen sach: ");
     scanf("%d", &id_need_to_find);
     for (int index = 0; index < numberBooks; index++)
+    {
+        if (id_need_to_find == (output + index)->id)
         {
-            if (id_need_to_find == (output + index)->id)
-            {
-                printf("\n======== Sua thong tin sach ========");
-                fflush(stdin);
-                printf("\nTen: ");
-                gets((output + index)->name);
-                printf("******** Nhap thong tin tac gia ********");
-                (output + index)->author = (Author *)malloc(sizeof(Author));
-                enter((output + index)->author);
-                fflush(stdin);
-                printf("\nThe loai: ");
-                gets((output + index)->type);
-                printf("Gia tien: ");
-                scanf("%d", &(output + index)->price);
-                has_book = true;
-            }
+            printf("\n======== Sua thong tin sach ========");
+            fflush(stdin);
+            printf("\nTen: ");
+            gets((output + index)->name);
+            printf("******** Nhap thong tin tac gia ********");
+            (output + index)->author = (Author *)malloc(sizeof(Author));
+            enter((output + index)->author);
+            fflush(stdin);
+            printf("\nThe loai: ");
+            gets((output + index)->type);
+            printf("Gia tien: ");
+            scanf("%d", &(output + index)->price);
+            has_book = true;
         }
-    if(has_book){
+    }
+    if (has_book)
+    {
         printf("Sua sach thanh cong!");
     }
-    else{
+    else
+    {
         printf("Khong co quyen sach nay !");
     }
 }
-void removeBook(book_st *output, int &id_need_to_find, int &numberBooks){
+void removeBook(book_st *output, int &id_need_to_find, int &numberBooks)
+{
     bool has_book = false;
     printf("Nhap id quyen sach: ");
     scanf("%d", &id_need_to_find);
     for (int index = 0; index < numberBooks; index++)
     {
-        if ((output+index)->id == id_need_to_find)
+        if ((output + index)->id == id_need_to_find)
         {
-            *(output + index) = *(output + index+1);
+            *(output + index) = *(output + index + 1);
             numberBooks--;
             has_book = true;
-        }  
+        }
     }
-    if(has_book){
+    if (has_book)
+    {
         printf("Xoa sach thanh cong!");
     }
-    else{
+    else
+    {
         printf("Khong co quyen sach nay !");
     }
 }
@@ -301,7 +293,7 @@ void print(book_st *output, int numberBooks)
         printf("\nId ||Ten\t\t||Tac gia\t\t\t ||The loai\t\t||Gia tien");
         for (int index = 0; index < numberBooks; index++)
         {
-            printf("\n%-3d||%-17s\t||%-17s(%d/ %d/ %d) ||%-17s\t||%d", (output+index)->id, (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year, (output + index)->type, (output + index)->price);
+            printf("\n%-3d||%-17s\t||%-17s(%d/ %d/ %d) ||%-17s\t||%d", (output + index)->id, (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year, (output + index)->type, (output + index)->price);
         }
     }
 }
@@ -342,7 +334,7 @@ void menu(FILE *file, char *path, book_st *input, int numberBooks, int totalBook
         printf("|2. Sap xep, thong ke va hien thi thong tin\t      |\n|   chi tiet cua tung quyen sach theo the loai (Z->A).|\n");
         printf("|3. Sua thong tin sach\t\t\t\t      |\n");
         printf("|4. Xoa thong tin sach\t\t\t\t      |\n");
-        printf("|5. Tim  quyen sach theo the loai\t\t      |\n");
+        printf("|5. Tim quyen sach theo the loai\t\t       |\n");
         printf("|6. Ghi vao tap tin nhi phan book.dat.\t\t      |\n");
         printf("|7. Thoat\t\t\t\t\t      |\n");
         printf("|-----------------------------------------------------|\n");
