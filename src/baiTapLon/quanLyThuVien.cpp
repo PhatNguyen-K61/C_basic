@@ -96,7 +96,7 @@ bool validDay(Date *check)
     return validDay;
 }
 void enter(Date *input)
-{
+{ //Nhap ngay thang nam
     printf("\nNgay: ");
     scanf("%d", &input->day);
     printf("Thang: ");
@@ -106,6 +106,7 @@ void enter(Date *input)
 }
 void enter(Author *input)
 {
+    //Nhap thong tin tac gia (gom co ham nhap ngay thang nam)
     printf("\nNhap ten tac gia: ");
     gets(input->name);
     printf("-------- Nhap ngay thang nam sinh tac gia --------");
@@ -116,7 +117,8 @@ void enter(Author *input)
     } while (!validDay(input->birthday));
 }
 void enter(book_st *input)
-{
+{ 
+    //Nhap thong tin cua 1 quyen sach (gom co ham nhap tac gia)
     printf("\nNhap id cua sach: ");
     fflush(stdin);
     scanf("%d", &input->id);
@@ -133,42 +135,50 @@ void enter(book_st *input)
     scanf("%d", &input->price);
 }
 void enterBooks(book_st *&input, int &numberBooks)
-{   
-    do{
-    printf("->Nhap so cuon sach: ");
-    scanf("%d", &numberBooks);
-    if(numberBooks<= 0){
-        printf("Hay nhap lai !\n");
-    }
-    }while(numberBooks<=0);
+{ 
+    //Nhap thong tin nhieu quyen sach
+    do
+    {
+        printf("->Nhap so cuon sach: ");
+        scanf("%d", &numberBooks);
+        if (numberBooks <= 0)
+        {
+            printf("Hay nhap lai !\n");
+        }
+    } while (numberBooks <= 0);
     input = (book_st *)realloc(input, (numberBooks) * sizeof(book_st));
-    for (int index = 0; index < numberBooks; index++)
+    for (int index = 0; index < numberBooks; index++) //vong lap de lap ham nhap 1 quyen sach
     {
         printf("\n++++++++++++++++ Nhap thong tin quyen sach %d ++++++++++++++++", index + 1);
         enter(&*(input + index));
     }
 }
-int countBooksByType(book_st *input, int numberBooks, char search[30]){
-     int count = 0;
+int countBooksByType(book_st *input, int numberBooks, char search[30])
+{
+    //dem sach theo the loai
+    int count = 0;
     for (int i = 0; i < numberBooks; i++)
     {
-        if (strcmp((input + i)->type,search) == 0)
+        if (strcmp((input + i)->type, search) == 0)
         {
-            count++;
+            count++; //neu cung loai thì dem
         }
     }
     return count;
 }
 void printTypeBooks(book_st *output, int numberBooks)
-{   
-    if(numberBooks!=0){
-    printf("\nTruyen tranh co %d quyen sach",countBooksByType(output, numberBooks,"truyen tranh"));
-    printf("\nTruyen kiem hiep co %d quyen sach", countBooksByType(output, numberBooks,"truyen kiem hiep"));
-    printf("\nGiao trinh co %d quyen sach\n",countBooksByType(output, numberBooks,"giao trinh"));
+{ 
+    //in so the loai
+    if (numberBooks != 0)
+    {
+        printf("\nTruyen tranh co %d quyen sach", countBooksByType(output, numberBooks, "truyen tranh"));
+        printf("\nTruyen kiem hiep co %d quyen sach", countBooksByType(output, numberBooks, "truyen kiem hiep"));
+        printf("\nGiao trinh co %d quyen sach\n", countBooksByType(output, numberBooks, "giao trinh"));
     }
 }
 void editBook(book_st *output, int &id_need_to_find, int numberBooks)
-{
+{ 
+    //ham sua sach
     int has_book = false;
     printf("Nhap id quyen sach: ");
     scanf("%d", &id_need_to_find);
@@ -201,7 +211,8 @@ void editBook(book_st *output, int &id_need_to_find, int numberBooks)
     }
 }
 void removeBook(book_st *output, int &id_need_to_find, int &numberBooks)
-{
+{ 
+    //ham xoa sach
     bool has_book = false;
     printf("Nhap id quyen sach: ");
     scanf("%d", &id_need_to_find);
@@ -224,7 +235,8 @@ void removeBook(book_st *output, int &id_need_to_find, int &numberBooks)
     }
 }
 void addBook(book_st *input, int &numberBooks, const book_st book)
-{
+{ 
+    //them sach
     numberBooks++;
     input = (book_st *)realloc(input, numberBooks * sizeof(book_st));
     *(input + numberBooks - 1) = book;
@@ -236,7 +248,8 @@ void enterType(char search[30])
     gets(search);
 }
 book_st *findBookByType(book_st *input, int numberBooks, int totalBooks, char search[30])
-{
+{ 
+    //tim sach theo the loai
     book_st *result;
     book_st temp;
     totalBooks = 0;
@@ -252,7 +265,8 @@ book_st *findBookByType(book_st *input, int numberBooks, int totalBooks, char se
     return result;
 }
 void print(book_st *output, int numberBooks)
-{
+{ 
+    //ham xuat
     if (numberBooks == 0)
     {
         printf("Loi !!!\n");
@@ -268,13 +282,14 @@ void print(book_st *output, int numberBooks)
     printf("\n");
 }
 void arrangeBook(book_st *output, int numberBooks)
-{
+{ 
+    //sap xep sach
     book_st temp;
     for (int i = 0; i < numberBooks - 1; i++)
     {
         for (int j = i + 1; j < numberBooks; j++)
         {
-            if (strcmp((output + i)->name, (output + j)->name) < 0)
+            if (strcmp((output + i)->type, (output + j)->type) < 0)
             {
                 temp = *(output + i);
                 *(output + i) = *(output + j);
@@ -284,18 +299,20 @@ void arrangeBook(book_st *output, int numberBooks)
     }
 }
 void exportBook(FILE *file, char *path, book_st *output, int numberBooks)
-{
-    char *mode = "a";
+{ 
+    //xuat sach ra file
+    char *mode = "a+b";
     file = fopen(path, mode);
     fprintf(file, "\nId ||Ten\t\t\t\t\t||Tac gia\t\t\t\t\t\t\t||The loai\t\t\t\t||Gia tien");
     for (int index = 0; index < numberBooks; index++)
     {
-        fprintf(file, "\n%d||%-20s\t||%-20s(%d/ %d/ %d) ||%-15s\t\t||%d", (output + index)->id, (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year, (output + index)->type, (output + index)->price);
+        fprintf(file, "\n%-3d||%-20s\t||%-20s(%d/ %d/ %d) ||%-15s\t\t||%d", (output + index)->id, (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year, (output + index)->type, (output + index)->price);
     }
     fclose(file);
 }
 void menu(FILE *file, char *path, book_st *input, int numberBooks, int totalBooks, char search[30], int id_need_to_find)
-{
+{ 
+    //ham menu
     int choise;
     do
     {
