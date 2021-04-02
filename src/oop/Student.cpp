@@ -18,6 +18,7 @@ class DateTime{
             this->month = month;
             this->year = year;
         }
+        friend istream &operator>>(istream &input, DateTime &dateTime);
         friend ostream &operator<<(ostream &output,const DateTime dateTime){
             cout<<dateTime.day<<"/"<<dateTime.month<<"/"<<dateTime.year;
         }
@@ -29,13 +30,22 @@ class Student{
         string name;
         DateTime birthday;
     public:
+        Student(){
+            this->id= "001";
+            this->name= "Anh";
+            this->birthday= DateTime();
+        }
         Student(string id, string name,DateTime birthday){
             this->id = id;
             this->name = name;
             this->birthday = birthday;
         }
+        string getId(){
+            return this->id;
+        }
+        friend istream& operator>>(istream &input, Student &student);
         void print(){
-            cout<<"{id:"<<id<<"name:"<<name<<"birthday:"<<birthday<<"}";
+            cout<<"{id:"<<id<<" name:"<<name<<" birthday:"<<birthday<<"}";
         }     
 
 };
@@ -48,9 +58,30 @@ class Students{
             students = vector<Student>();
             count = 0;
         }
+        bool exist(string id){
+            bool found=false;
+            for(auto student = students.begin(); student != students.end(); ++student){
+                if(student->getId() == id){
+                    found=true;
+                    break;
+                }
+            }
+            return found;
+        }
         void add(Student student){
+            if(!this->exist(student.getId())){
                 this->students.push_back(student);// NOTE: thêm 1 studnet vào cuối vector
                 count++;//NOTE: số lượng phần tử trong vector sẽ tăng lên 1
+            }else{
+                cout<<"This id existed"<<endl;
+            }
+        }
+        void remove(string id){
+            for(auto student = students.begin(); student != students.end(); ++student){
+                if(student->getId() == id){
+                    students.erase(student);
+                }
+            }
         }
         void print(){
             for (auto student = students.begin(); student != students.end(); ++student) {//NOTE: đi từ đầu đến cuối vector để in từng phần tử
@@ -59,13 +90,31 @@ class Students{
             }
         }
 };
+istream &operator>>(istream &input, DateTime &dateTime){
+    cout<<"Enter day: "<<endl;
+    cin>>dateTime.day;
+    cout<<"Enter month: "<<endl;
+    cin >>dateTime.month;
+    cout<<"Enter year: "<<endl;
+    cin >>dateTime.year;
+}
+istream &operator>>(istream &input, Student &student){
+    cout<<"Enter id: "<<endl;
+    cin >>student.id;
+    cout<<"Enter name: "<<endl;
+    cin >>student.name;
+    cout<<"Enter birthday: "<<endl;
+    cin>>student.birthday;
+}
 int main(){
-    DateTime birthday = DateTime(3,2,2013);
-    Student student1 = Student("001","Minh",birthday);
-    Student student2 = Student("002","Anh",birthday);
+    Student student;
     Students students = Students();
-    students.add(student1);
-    students.add(student2);
+    for(int i = 0; i < 3; i++){
+        cin >>student;
+        students.add(student);
+    }
+    students.print();
+    students.remove("001");
     students.print();
     return 0;
 }
