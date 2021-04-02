@@ -13,18 +13,18 @@
 //        printf("%c\n", *s++);/* con trỏ s++ thì ra Abc, còn con trỏ ++s thì ra bc */
 // }
 //vd3
-void f(int a[]){
-    for(int i = 0; i<3; i++){
-        a[i]++;
-    }
-}
-main(){
-    int i, a[]= {10, 20, 30};
-    f(a);
-    for(i=0; i<3; ++i){
-        printf("%d", a[i]);
-    }
-}
+// void f(int a[]){
+//     for(int i = 0; i<3; i++){
+//         a[i]++;
+//     }
+// }
+// main(){
+//     int i, a[]= {10, 20, 30};
+//     f(a);
+//     for(i=0; i<3; ++i){
+//         printf("%d", a[i]);
+//     }
+// }
 // vd4
 // int main();
 // void main(){ /*int mới đúng*/

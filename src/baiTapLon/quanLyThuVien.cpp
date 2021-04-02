@@ -49,7 +49,9 @@ int main()
     bookList = (book_st *)malloc(sizeof(book_st));
     system("color b0");
     menu(file, output_path, bookList, numberBooks, totalBooks, search, id_need_to_find);
-    free(bookList);
+    if(bookList != NULL){
+        free(bookList);
+    }
     return EXIT_SUCCESS;
 }
 bool validDay(Date *check)
@@ -167,12 +169,12 @@ int countBooksByType(book_st *input, int numberBooks, char search[30])
     return count;
 }
 void printTypeBooks(book_st *output, int numberBooks)
-{ 
+{
     //in so the loai
     if (numberBooks != 0)
     {
         printf("\nTruyen tranh co %d quyen sach", countBooksByType(output, numberBooks, "truyen tranh"));
-        printf("\nTruyen kiem hiep co %d quyen sach", countBooksByType(output, numberBooks, "truyen kiem hiep"));
+        printf("\nTruyen kiem hiep co %d quyen sach", countBooksByType(output, numberBooks, "tai lieu"));
         printf("\nGiao trinh co %d quyen sach\n", countBooksByType(output, numberBooks, "giao trinh"));
     }
 }
@@ -301,7 +303,7 @@ void arrangeBook(book_st *output, int numberBooks)
 void exportBook(FILE *file, char *path, book_st *output, int numberBooks)
 { 
     //xuat sach ra file
-    char *mode = "a+b";
+    char *mode = "ab";
     file = fopen(path, mode);
     fprintf(file, "\nId ||Ten\t\t\t\t\t||Tac gia\t\t\t\t\t\t\t||The loai\t\t\t\t||Gia tien");
     for (int index = 0; index < numberBooks; index++)
