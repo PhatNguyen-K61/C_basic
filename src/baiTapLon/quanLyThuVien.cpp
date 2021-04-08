@@ -103,8 +103,13 @@ void enter(Date *input)
     scanf("%d", &input->day);
     printf("Thang: ");
     scanf("%d", &input->month);
+    do{
     printf("Nam: ");
     scanf("%d", &input->year);
+    if(input->year > 2021 || input->year <= 0){
+        printf("*Nhap lai nam sinh*\n");
+    }
+    }while(input->year > 2021 || input->year <= 0);
 }
 void enter(Author *input)
 {
@@ -116,6 +121,9 @@ void enter(Author *input)
     {
         input->birthday = (Date *)malloc(sizeof(Date));
         enter(input->birthday);
+        if(!validDay(input->birthday)){
+            printf("- Hay nhap lai!");
+        }
     } while (!validDay(input->birthday));
 }
 void enter(book_st *input)
@@ -174,7 +182,7 @@ void printTypeBooks(book_st *output, int numberBooks)
     if (numberBooks != 0)
     {
         printf("\nTruyen tranh co %d quyen sach", countBooksByType(output, numberBooks, "truyen tranh"));
-        printf("\nTruyen kiem hiep co %d quyen sach", countBooksByType(output, numberBooks, "truyen kiem hiep"));
+        printf("\nTruyen kiem hiep co %d quyen sach", countBooksByType(output, numberBooks, "tai lieu"));
         printf("\nGiao trinh co %d quyen sach\n", countBooksByType(output, numberBooks, "giao trinh"));
     }
 }
@@ -222,9 +230,11 @@ void removeBook(book_st *output, int &id_need_to_find, int &numberBooks)
     {
         if ((output + index)->id == id_need_to_find)
         {
-            *(output + index) = *(output + index + 1);
+            for(int j = index; j < numberBooks - 1; j++){
+                *(output + j) = *(output + j + 1);
+                has_book = true;
+            }
             numberBooks--;
-            has_book = true;
         }
     }
     if (has_book)
@@ -275,10 +285,10 @@ void print(book_st *output, int numberBooks)
     }
     else
     {
-        printf("\nId ||Ten\t\t||Tac gia\t\t\t     ||The loai\t\t||Gia tien");
+        printf("\nId ||Ten\t\t||Tac gia\t\t\t     ||The loai\t\t\t||Gia tien");
         for (int index = 0; index < numberBooks; index++)
         {
-            printf("\n%-3d||%-17s\t||%-21s(%d/ %d/ %d) ||%-17s\t||%d", (output + index)->id, (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year, (output + index)->type, (output + index)->price);
+            printf("\n%-3d||%-17s\t||%-21s(%-2d/%-2d/%-4d)  ||%-19s\t||%d", (output + index)->id, (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year, (output + index)->type, (output + index)->price);
         }
     }
     printf("\n");
@@ -308,7 +318,7 @@ void exportBook(FILE *file, char *path, book_st *output, int numberBooks)
     fprintf(file, "\nId ||Ten\t\t\t\t\t||Tac gia\t\t\t\t\t\t\t\t||The loai\t\t\t\t||Gia tien");
     for (int index = 0; index < numberBooks; index++)
     {
-        fprintf(file, "\n%-3d||%-20s\t||%-24s(%d/ %d/ %d) ||%-17s\t\t||%d", (output + index)->id, (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year, (output + index)->type, (output + index)->price);
+        fprintf(file, "\n%-3d||%-20s\t||%-24s(%-2d/%-2d/%-4d)  ||%-17s\t\t||%d", (output + index)->id, (output + index)->name, (output + index)->author->name, (output + index)->author->birthday->day, (output + index)->author->birthday->month, (output + index)->author->birthday->year, (output + index)->type, (output + index)->price);
     }
     fclose(file);
 }
