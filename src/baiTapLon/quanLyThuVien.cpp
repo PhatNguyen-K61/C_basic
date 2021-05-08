@@ -301,7 +301,7 @@ void arrangeBook(book_st *output, int numberBooks)
     {
         for (int j = i + 1; j < numberBooks; j++)
         {
-            if (strcmp((output + i)->type, (output + j)->type) < 0)
+            if (strcmp((output + i)->type, (output + j)->type) > 0)
             {
                 temp = *(output + i);
                 *(output + i) = *(output + j);
