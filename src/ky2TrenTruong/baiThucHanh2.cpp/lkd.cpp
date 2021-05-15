@@ -36,6 +36,7 @@ Node *TaoMoi(int x){
     p->Next=NULL;
     return p;
 }
+// Thêm Node mới vào đầu danh sách
 Node *ThemDau(SingleList *&list, int x){
     Node *H=TaoMoi(x);
     if(list->Head=NULL){
@@ -43,5 +44,15 @@ Node *ThemDau(SingleList *&list, int x){
     }else{
         H->Next = list->Head;
         list->Head=H;
+    }
+}
+// Thêm Node mới vào cuối danh sách
+Node *ThemCuoi(SingleList *&list, int x){
+    Node *H=TaoMoi(x);
+    if(list->Tail=NULL){
+        list->Head=list->Tail=H;
+    }else{
+        list->Tail->Next=H;
+        list->Tail=H;
     }
 }
