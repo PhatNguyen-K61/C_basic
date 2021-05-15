@@ -14,6 +14,7 @@ struct SingleList
 void Initialize(SingleList *&list);
 Node *TaoMoi(int x);
 Node *ThemDau(SingleList *&list, int x);
+Node *ThemCuoi(SingleList *&list, int x);
 int main(int argc, char** argv) {
     SingleList *list;
     Initialize(list);
