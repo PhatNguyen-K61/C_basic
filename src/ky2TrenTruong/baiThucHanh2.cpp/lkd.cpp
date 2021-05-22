@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
     Initialize(list);
     return 0;
 }
-// Khởi tạo cho pHead và pTail 
+// Khởi tạo cho Head và Tail 
 void Initialize(SingleList *&list)
 {
     list=(SingleList *)malloc(sizeof(SingleList));
