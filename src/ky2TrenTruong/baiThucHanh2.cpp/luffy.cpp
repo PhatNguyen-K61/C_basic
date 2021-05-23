@@ -5,6 +5,6 @@ int main(){
    for(int i=0;i<n;i++){
       scanf("%d",&a[i]);
    }
-   printf("%d",a[1]-a[0]);
+   printf("%d",abs(a[0]-a[n-1]));
    return 0;
 }
