@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<math.h>
 int main(){
    int n,a[100];
    scanf("%d",&n);
