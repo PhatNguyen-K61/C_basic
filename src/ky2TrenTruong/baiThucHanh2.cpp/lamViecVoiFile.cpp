@@ -2,10 +2,10 @@
 #include<stdlib.h>
 void enter(float **a, int *n);
 void print(float *a, int n);
-void NhapFileVB(int &n, float *&a, char *fname);
-void NhapFileNP(int &n, float *&a, char *fname);
-void XuatFileVB(int n, float *a, char *fname);
-void XuatFileNP(int n, float *a, char *fname);
+void enterTxtFile(int &n, float *&a, char *fname);
+void enterBinaryFile(int &n, float *&a, char *fname);
+void printTxtFile(int n, float *a, char *fname);
+void printBinaryFile(int n, float *a, char *fname);
 int Menu();
 int main(){
 	float *a;
@@ -32,7 +32,7 @@ int main(){
 								printf("Ten file can xuat day: ");
 								fflush(stdin);
 								gets(name);
-								XuatFileVB(n,a,name);
+								printTxtFile(n,a,name);
 								ktvb = 1;
 					          } break;	
 					    case 3:{
@@ -44,21 +44,21 @@ int main(){
 								printf("Ten file can xuat day: ");
 								fflush(stdin);
 								gets(name);
-								XuatFileNP(n,a,name);
+								printBinaryFile(n,a,name);
 								ktnp = 1 ;
 					          } break;
 					    case 4:{
 								printf("Ten file can doc day: ");
 								fflush(stdin);
 								gets(name);
-								NhapFileVB(n,a,name);
+								enterTxtFile(n,a,name);
 								print(a,n);
 					          } break;
 					    case 5:{	    	 
 								printf("Ten file can doc day: ");
 								fflush(stdin);
 								gets(name);
-								NhapFileNP(n,a,name);
+								enterBinaryFile(n,a,name);
 								print(a,n);
 					          } break;
 					    case 6 : exit(1);
@@ -81,7 +81,7 @@ void print(float *a, int n){
 		printf("%.2f\t",(*a+i));
 	}
 }
-void NhapFileVB(int &n, float *&a, char *fname) // nhap vao` n so thuc tu file van ban
+void enterTxtFile(int &n, float *&a, char *fname)
      { FILE *pf;
      	pf = fopen(fname,"r");
      	if( pf == NULL)
@@ -97,7 +97,7 @@ void NhapFileVB(int &n, float *&a, char *fname) // nhap vao` n so thuc tu file v
 		   }
 		fclose(pf);
 	 }
-void NhapFileNP(int &n, float *&a, char *fname)
+void enterBinaryFile(int &n, float *&a, char *fname)
      {
      	FILE *pf;
      		pf = fopen(fname,"rb");
@@ -115,7 +115,7 @@ void NhapFileNP(int &n, float *&a, char *fname)
 		fclose(pf);
 	 }
 
-void XuatFileVB(int n, float *a, char *fname)
+void printTxtFile(int n, float *a, char *fname)
      {
      	FILE *pf;
      	pf = fopen(fname,"w");
@@ -132,7 +132,7 @@ void XuatFileVB(int n, float *a, char *fname)
 		fclose(pf);
 	 }
 
-void XuatFileNP(int n, float *a, char *fname)
+void printBinaryFile(int n, float *a, char *fname)
      {
      	FILE *pf;
      	pf = fopen(fname,"wb");
