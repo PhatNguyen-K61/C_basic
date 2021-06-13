@@ -78,7 +78,7 @@ void enter(float **a, int *n){
 }
 void print(float *a, int n){
 	for(int i=0;i<n;i++){
-		printf("%.2f\t",(*a+i));
+		printf("%.2f\t",*(a+i));
 	}
 }
 void enterTxtFile(int &n, float *&a, char *fname)
@@ -93,7 +93,7 @@ void enterTxtFile(int &n, float *&a, char *fname)
 		a = (float*)calloc(n,sizeof(float));
 		for(int i = 0 ; i < n ; i ++)
 		   {
-		   	fscanf(pf,"%f",(a+i));
+		   	fscanf(pf,"%f",&*(a+i));
 		   }
 		fclose(pf);
 	 }
@@ -110,7 +110,7 @@ void enterBinaryFile(int &n, float *&a, char *fname)
 		a = (float*)calloc(n,sizeof(float));
 		for(int i = 0 ; i < n ; i ++)
 		   {
-		   	fread((a+i),sizeof(float),1,pf);
+		   	fread(&*(a+i),sizeof(float),1,pf);
 		   }
 		fclose(pf);
 	 }
@@ -127,7 +127,7 @@ void printTxtFile(int n, float *a, char *fname)
 		fprintf(pf,"%d",n);
 		for(int i = 0 ; i < n ; i++)
 		   {
-		   	fprintf(pf," %.2f ",*(a+i));
+		   	fprintf(pf," %.2f",*(a+i));
 		   }
 		fclose(pf);
 	 }
